@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/custom-badge";
 import { CalendarIcon, ArrowRightIcon, CheckCircle, Clock, Dumbbell } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { exercises, getUserWorkouts, getUserExercises } from '@/data/exercises';
