@@ -3,10 +3,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Dumbbell, LineChart, Timer, Trophy, Users } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const LandingPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Header */}
+      <header className="py-4 bg-white border-b">
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Dumbbell className="h-6 w-6 text-fitblue-500" />
+            <span className="text-xl font-bold text-fitblue-500">FitLogix</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <Link to="/login">
+              <Button>Log In</Button>
+            </Link>
+          </div>
+        </div>
+      </header>
+      
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-b from-fitblue-500 to-fitblue-600 dark:from-gray-800 dark:to-gray-900">
         <div className="container mx-auto px-4 max-w-6xl">
