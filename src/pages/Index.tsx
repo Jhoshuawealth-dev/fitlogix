@@ -12,7 +12,7 @@ const Index = () => {
     if (isAuthenticated) {
       navigate("/dashboard");
     } else {
-      navigate("/login");
+      navigate("/"); // Redirect to landing page instead of login
     }
   }, [isAuthenticated, navigate]);
 

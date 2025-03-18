@@ -36,14 +36,12 @@ const AppRoutes = () => {
   return (
     <>
       <Routes>
+        {/* Landing page as the default route */}
         <Route 
           path="/" 
           element={
             isAuthenticated ? (
-              <>
-                <Header />
-                <Dashboard />
-              </>
+              <Navigate to="/dashboard" />
             ) : (
               <LandingPage />
             )
