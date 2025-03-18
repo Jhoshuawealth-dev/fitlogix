@@ -10,6 +10,7 @@ import { exercises, getUserExercises } from '@/data/exercises';
 import { useAuth } from '@/contexts/AuthContext';
 import { Exercise, UserExercise, WorkoutSet } from '@/types';
 import { useToast } from '@/components/ui/use-toast';
+import WorkoutTimer from '@/components/WorkoutTimer';
 
 const ExerciseDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -104,6 +105,13 @@ const ExerciseDetail = () => {
     setSets([...sets, newSet]);
   };
 
+  const handleTimerComplete = () => {
+    toast({
+      title: "Rest Period Complete",
+      description: "Time to start your next set!",
+    });
+  };
+
   if (!exercise) {
     return <div className="container mx-auto px-4 py-6 flex justify-center">Loading...</div>;
   }
@@ -160,7 +168,19 @@ const ExerciseDetail = () => {
         </div>
         
         {/* Right Column - Workout Tracker */}
-        <div>
+        <div className="space-y-4">
+          {/* Timer Component */}
+          {!isCompleted && (
+            <WorkoutTimer 
+              timerSettings={{
+                defaultDuration: 60,  // 1 minute rest between sets
+                autoStart: false,
+                soundEnabled: true
+              }}
+              onTimerComplete={handleTimerComplete}
+            />
+          )}
+          
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">

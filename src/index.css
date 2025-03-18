@@ -97,11 +97,11 @@
 
 @layer components {
   .exercise-card {
-    @apply rounded-xl shadow-md hover:shadow-lg transition-all duration-300;
+    @apply rounded-xl shadow-md hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:border-gray-700;
   }
 
   .progress-bar {
-    @apply h-2 bg-fitblue-200 rounded-full overflow-hidden;
+    @apply h-2 bg-fitblue-200 dark:bg-gray-700 rounded-full overflow-hidden;
   }
 
   .progress-fill {
