@@ -23,7 +23,8 @@ const Login = () => {
 
     try {
       await login(email, password);
-      navigate('/dashboard');
+      // Redirect to home page after successful login
+      navigate('/');
     } catch (err) {
       setError('Invalid credentials. Please try again.');
       console.error(err);
@@ -33,7 +34,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-gradient-to-b from-white to-fitblue-50">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-gradient-to-b from-white to-fitblue-50 dark:from-gray-900 dark:to-gray-800">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-2">
@@ -70,13 +71,13 @@ const Login = () => {
               </div>
               
               {error && (
-                <div className="bg-red-50 p-3 rounded-md text-red-600 text-sm flex items-start gap-2">
+                <div className="bg-red-50 dark:bg-red-900/20 p-3 rounded-md text-red-600 dark:text-red-400 text-sm flex items-start gap-2">
                   <Info className="h-5 w-5 flex-shrink-0 mt-0.5" />
                   <span>{error}</span>
                 </div>
               )}
 
-              <div className="bg-amber-50 p-3 rounded-md text-amber-700 text-sm flex items-start gap-2">
+              <div className="bg-amber-50 dark:bg-amber-900/20 p-3 rounded-md text-amber-700 dark:text-amber-400 text-sm flex items-start gap-2">
                 <Info className="h-5 w-5 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold">Demo Account:</p>
