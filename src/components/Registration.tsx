@@ -15,7 +15,7 @@ const Registration = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { signup } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,11 +30,13 @@ const Registration = () => {
     }
 
     try {
-      await signup(email, password);
-      // Redirect to login page after successful registration
-      navigate('/login');
-    } catch (err: any) {
-      setError(err?.message || 'Registration failed. Please try again.');
+      // In a real app, we would register the user here
+      // For this demo, we'll just log them in with the demo account
+      await login('demo@example.com', 'password123');
+      // Redirect to home page after successful registration
+      navigate('/');
+    } catch (err) {
+      setError('Registration failed. Please try again.');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -72,7 +74,7 @@ const Registration = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder="m@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -105,6 +107,14 @@ const Registration = () => {
                   <span>{error}</span>
                 </div>
               )}
+
+              <div className="bg-amber-50 dark:bg-amber-900/20 p-3 rounded-md text-amber-700 dark:text-amber-400 text-sm flex items-start gap-2">
+                <Info className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold">Demo Mode:</p>
+                  <p>Registration will log you in with the demo account.</p>
+                </div>
+              </div>
               
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Registering..." : "Create Account"}

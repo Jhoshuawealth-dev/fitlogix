@@ -9,8 +9,8 @@ import { Dumbbell, Info, UserPlus } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('demo@example.com');
+  const [password, setPassword] = useState('password123');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const { login } = useAuth();
@@ -25,8 +25,8 @@ const Login = () => {
       await login(email, password);
       // Redirect to home page after successful login
       navigate('/');
-    } catch (err: any) {
-      setError(err?.message || 'Invalid credentials. Please try again.');
+    } catch (err) {
+      setError('Invalid credentials. Please try again.');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -53,7 +53,7 @@ const Login = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder="m@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -76,6 +76,15 @@ const Login = () => {
                   <span>{error}</span>
                 </div>
               )}
+
+              <div className="bg-amber-50 dark:bg-amber-900/20 p-3 rounded-md text-amber-700 dark:text-amber-400 text-sm flex items-start gap-2">
+                <Info className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold">Demo Account:</p>
+                  <p>Email: demo@example.com</p>
+                  <p>Password: password123</p>
+                </div>
+              </div>
               
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Logging in..." : "Sign In"}
