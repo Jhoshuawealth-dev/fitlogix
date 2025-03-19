@@ -1,27 +1,35 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { 
   ArrowRight, 
+  Building, 
+  Calendar, 
+  Check, 
+  CheckCircle, 
+  ChevronRight,
   Clock, 
   Dumbbell, 
+  Facebook, 
+  Globe, 
+  Instagram, 
   LineChart, 
-  CheckCircle, 
+  MessageCircle, 
+  MessageSquare, 
+  Phone, 
+  Send, 
+  Star, 
   Timer, 
   Trophy, 
-  Users, 
-  Star, 
-  ChevronRight,
-  Instagram,
-  Twitter,
-  Facebook,
-  UserPlus
+  Twitter, 
+  UserPlus, 
+  Users
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useAuth } from '@/contexts/AuthContext';
 import Registration from '@/components/Registration';
 import HeroBackgroundSlider from '@/components/HeroBackgroundSlider';
+import Header from '@/components/Header';
 
 const LandingPage = () => {
   const { isAuthenticated } = useAuth();
@@ -29,37 +37,10 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="py-4 bg-white dark:bg-gray-800 border-b z-50 relative">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Dumbbell className="h-6 w-6 text-fitblue-500" />
-            <span className="text-xl font-bold text-fitblue-500">FitLogix</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <ThemeToggle />
-            {isAuthenticated ? (
-              <Link to="/dashboard">
-                <Button>Go to Dashboard</Button>
-              </Link>
-            ) : (
-              <div className="flex gap-2">
-                <Link to="/register">
-                  <Button variant="outline" className="flex items-center gap-2">
-                    <UserPlus className="h-4 w-4" />
-                    Sign Up
-                  </Button>
-                </Link>
-                <Link to="/login">
-                  <Button>Log In</Button>
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-      </header>
+      <Header />
       
       {/* Hero Section with Background Slider */}
-      <section className="relative py-32 flex items-center min-h-[600px] overflow-hidden">
+      <section id="hero" className="relative py-32 flex items-center min-h-[600px] overflow-hidden">
         <HeroBackgroundSlider />
         <div className="container mx-auto px-4 max-w-6xl relative z-20">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
@@ -77,7 +58,12 @@ const LandingPage = () => {
                     <ArrowRight className="ml-1 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg" className="font-medium text-base bg-white/10 text-white border-white/20 hover:bg-white/20">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="font-medium text-base bg-white/10 text-white border-white/20 hover:bg-white/20"
+                  onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   Learn More
                 </Button>
               </div>
@@ -87,7 +73,7 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+      <section id="features" className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Powerful Features</h2>
@@ -150,6 +136,76 @@ const LandingPage = () => {
               <p className="text-gray-600 dark:text-gray-400">
                 Enjoy a sleek UI optimized for all devices with dark mode support for comfortable viewing.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section id="about" className="py-20 bg-white dark:bg-gray-800">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">About FitLogix</h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Our mission is to help everyone achieve their fitness goals
+            </p>
+          </div>
+
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
+            <div className="lg:w-1/2">
+              <img 
+                src="/lovable-uploads/573a9ea8-03f9-4239-b0ae-1a6198d64efb.png" 
+                alt="Team working out" 
+                className="w-full h-auto rounded-xl shadow-lg" 
+              />
+            </div>
+            <div className="lg:w-1/2 space-y-6">
+              <h3 className="text-2xl font-bold">Our Story</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                FitLogix was founded in 2022 by a team of fitness enthusiasts and technology experts who were frustrated with the lack of comprehensive, user-friendly workout tracking tools on the market.
+              </p>
+              <p className="text-gray-600 dark:text-gray-400">
+                Our team combines years of experience in personal training, sports science, and software development to create a platform that truly helps people achieve their fitness goals through data-driven insights and intuitive design.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                <div className="flex gap-3">
+                  <div className="w-12 h-12 bg-fitblue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Users className="h-6 w-6 text-fitblue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Expert Team</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Certified trainers and developers</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <div className="w-12 h-12 bg-fitblue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Building className="h-6 w-6 text-fitblue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Growing Company</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">With over 100,000 active users</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <div className="w-12 h-12 bg-fitblue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Globe className="h-6 w-6 text-fitblue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Global Presence</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Available in over 20 countries</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <div className="w-12 h-12 bg-fitblue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Star className="h-6 w-6 text-fitblue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Highly Rated</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">4.8/5 average user rating</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -364,6 +420,111 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* Contact Us Section */}
+      <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Contact Us</h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Have questions or feedback? We'd love to hear from you!
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md">
+              <h3 className="text-xl font-semibold mb-6">Send Us a Message</h3>
+              <form className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-1">Name</label>
+                    <input 
+                      type="text" 
+                      id="name" 
+                      className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800" 
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800" 
+                      placeholder="Your email"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-medium mb-1">Subject</label>
+                  <input 
+                    type="text" 
+                    id="subject" 
+                    className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800" 
+                    placeholder="Subject"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
+                  <textarea 
+                    id="message" 
+                    rows={4} 
+                    className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800" 
+                    placeholder="Your message"
+                  ></textarea>
+                </div>
+                <Button className="w-full">
+                  Send Message
+                  <Send className="ml-2 h-4 w-4" />
+                </Button>
+              </form>
+            </div>
+
+            <div className="space-y-8">
+              <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md">
+                <h3 className="text-xl font-semibold mb-6">Get in Touch</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-fitblue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                      <MessageCircle className="h-5 w-5 text-fitblue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">Email Us</h4>
+                      <p className="text-gray-600 dark:text-gray-400 mt-1">support@fitlogix.com</p>
+                      <p className="text-gray-600 dark:text-gray-400">info@fitlogix.com</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-fitblue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Phone className="h-5 w-5 text-fitblue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">Call Us</h4>
+                      <p className="text-gray-600 dark:text-gray-400 mt-1">+1 (555) 123-4567</p>
+                      <p className="text-gray-600 dark:text-gray-400">Monday-Friday, 9am-5pm EST</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md">
+                <h3 className="text-xl font-semibold mb-6">Follow Us</h3>
+                <div className="flex gap-4">
+                  <a href="#" className="w-10 h-10 bg-fitblue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-fitblue-600 dark:text-blue-400 hover:bg-fitblue-200 transition-colors">
+                    <Instagram className="h-5 w-5" />
+                  </a>
+                  <a href="#" className="w-10 h-10 bg-fitblue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-fitblue-600 dark:text-blue-400 hover:bg-fitblue-200 transition-colors">
+                    <Twitter className="h-5 w-5" />
+                  </a>
+                  <a href="#" className="w-10 h-10 bg-fitblue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-fitblue-600 dark:text-blue-400 hover:bg-fitblue-200 transition-colors">
+                    <Facebook className="h-5 w-5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-fitblue-500 dark:bg-gray-900">
         <div className="container mx-auto px-4 max-w-4xl text-center">
@@ -436,3 +597,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+

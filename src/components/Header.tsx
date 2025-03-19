@@ -1,17 +1,41 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Dumbbell, LogOut, Menu, User, X } from 'lucide-react';
+import { Dumbbell, Home, Info, LogOut, Menu, MessageSquare, Star, User, X } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { ThemeToggle } from './ThemeToggle';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
 const Header = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isLandingPage = location.pathname === '/';
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    if (isLandingPage) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+      setMobileMenuOpen(false);
+    } else {
+      // If not on landing page, navigate to landing page with hash
+      window.location.href = `/#${sectionId}`;
+    }
   };
 
   return (
@@ -46,6 +70,74 @@ const Header = () => {
             </>
           ) : (
             <>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    {isLandingPage ? (
+                      <div 
+                        onClick={() => scrollToSection('hero')} 
+                        className={navigationMenuTriggerStyle() + " cursor-pointer"}
+                      >
+                        <Home className="mr-1 h-4 w-4" />
+                        Home
+                      </div>
+                    ) : (
+                      <Link to="/" className={navigationMenuTriggerStyle()}>
+                        <Home className="mr-1 h-4 w-4" />
+                        Home
+                      </Link>
+                    )}
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    {isLandingPage ? (
+                      <div 
+                        onClick={() => scrollToSection('features')} 
+                        className={navigationMenuTriggerStyle() + " cursor-pointer"}
+                      >
+                        <Star className="mr-1 h-4 w-4" />
+                        Features
+                      </div>
+                    ) : (
+                      <Link to="/#features" className={navigationMenuTriggerStyle()}>
+                        <Star className="mr-1 h-4 w-4" />
+                        Features
+                      </Link>
+                    )}
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    {isLandingPage ? (
+                      <div 
+                        onClick={() => scrollToSection('about')} 
+                        className={navigationMenuTriggerStyle() + " cursor-pointer"}
+                      >
+                        <Info className="mr-1 h-4 w-4" />
+                        About Us
+                      </div>
+                    ) : (
+                      <Link to="/#about" className={navigationMenuTriggerStyle()}>
+                        <Info className="mr-1 h-4 w-4" />
+                        About Us
+                      </Link>
+                    )}
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    {isLandingPage ? (
+                      <div 
+                        onClick={() => scrollToSection('contact')} 
+                        className={navigationMenuTriggerStyle() + " cursor-pointer"}
+                      >
+                        <MessageSquare className="mr-1 h-4 w-4" />
+                        Contact Us
+                      </div>
+                    ) : (
+                      <Link to="/#contact" className={navigationMenuTriggerStyle()}>
+                        <MessageSquare className="mr-1 h-4 w-4" />
+                        Contact Us
+                      </Link>
+                    )}
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
               <ThemeToggle />
               <Link to="/login">
                 <Button>Log In</Button>
@@ -101,9 +193,78 @@ const Header = () => {
                 </div>
               </>
             ) : (
-              <Link to="/login" onClick={toggleMobileMenu}>
-                <Button className="w-full">Log In</Button>
-              </Link>
+              <>
+                {isLandingPage ? (
+                  <>
+                    <div 
+                      onClick={() => scrollToSection('hero')} 
+                      className="text-gray-700 dark:text-gray-200 hover:text-fitblue-500 transition-colors py-2 flex items-center gap-2 cursor-pointer"
+                    >
+                      <Home className="h-4 w-4" />
+                      Home
+                    </div>
+                    <div 
+                      onClick={() => scrollToSection('features')} 
+                      className="text-gray-700 dark:text-gray-200 hover:text-fitblue-500 transition-colors py-2 flex items-center gap-2 cursor-pointer"
+                    >
+                      <Star className="h-4 w-4" />
+                      Features
+                    </div>
+                    <div 
+                      onClick={() => scrollToSection('about')} 
+                      className="text-gray-700 dark:text-gray-200 hover:text-fitblue-500 transition-colors py-2 flex items-center gap-2 cursor-pointer"
+                    >
+                      <Info className="h-4 w-4" />
+                      About Us
+                    </div>
+                    <div 
+                      onClick={() => scrollToSection('contact')} 
+                      className="text-gray-700 dark:text-gray-200 hover:text-fitblue-500 transition-colors py-2 flex items-center gap-2 cursor-pointer"
+                    >
+                      <MessageSquare className="h-4 w-4" />
+                      Contact Us
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Link 
+                      to="/" 
+                      className="text-gray-700 dark:text-gray-200 hover:text-fitblue-500 transition-colors py-2 flex items-center gap-2"
+                      onClick={toggleMobileMenu}
+                    >
+                      <Home className="h-4 w-4" />
+                      Home
+                    </Link>
+                    <Link 
+                      to="/#features" 
+                      className="text-gray-700 dark:text-gray-200 hover:text-fitblue-500 transition-colors py-2 flex items-center gap-2"
+                      onClick={toggleMobileMenu}
+                    >
+                      <Star className="h-4 w-4" />
+                      Features
+                    </Link>
+                    <Link 
+                      to="/#about" 
+                      className="text-gray-700 dark:text-gray-200 hover:text-fitblue-500 transition-colors py-2 flex items-center gap-2"
+                      onClick={toggleMobileMenu}
+                    >
+                      <Info className="h-4 w-4" />
+                      About Us
+                    </Link>
+                    <Link 
+                      to="/#contact" 
+                      className="text-gray-700 dark:text-gray-200 hover:text-fitblue-500 transition-colors py-2 flex items-center gap-2"
+                      onClick={toggleMobileMenu}
+                    >
+                      <MessageSquare className="h-4 w-4" />
+                      Contact Us
+                    </Link>
+                  </>
+                )}
+                <Link to="/login" onClick={toggleMobileMenu}>
+                  <Button className="w-full">Log In</Button>
+                </Link>
+              </>
             )}
           </div>
         </div>

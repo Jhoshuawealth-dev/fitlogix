@@ -1,11 +1,11 @@
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Dumbbell, Info, UserPlus } from 'lucide-react';
+import { Dumbbell, Info, LogIn, UserPlus } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
 const Registration = () => {
@@ -124,6 +124,20 @@ const Registration = () => {
           </form>
         </CardContent>
         <CardFooter className="flex flex-col">
+          <div className="text-center w-full mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              Already have an account?{" "}
+              <Link to="/login" className="text-fitblue-600 dark:text-fitblue-400 hover:underline">
+                Log in
+              </Link>
+            </p>
+            <Link to="/login" className="w-full">
+              <Button variant="outline" className="w-full">
+                <LogIn className="mr-2 h-4 w-4" />
+                Log In
+              </Button>
+            </Link>
+          </div>
           <p className="text-xs text-center text-gray-500 mt-4">
             By signing up, you agree to our Terms of Service and Privacy Policy.
           </p>
