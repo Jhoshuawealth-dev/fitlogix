@@ -10,9 +10,9 @@ import {
 
 // Professional workout images
 const sliderImages = [
-  "/images/hero-workout-1.jpg",
-  "/images/hero-workout-2.jpg",
-  "/images/hero-workout-3.jpg"
+  "/lovable-uploads/856aea58-7fc8-4e06-aa29-3a1027870748.png",
+  "/lovable-uploads/573a9ea8-03f9-4239-b0ae-1a6198d64efb.png",
+  "/lovable-uploads/dd0ae3cf-fb65-4810-8646-1435dd21115e.png"
 ];
 
 const HeroBackgroundSlider = () => {
@@ -28,13 +28,13 @@ const HeroBackgroundSlider = () => {
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden">
-      <div className="absolute inset-0 bg-black/50 z-10" /> {/* Overlay for better text contrast */}
+      <div className="absolute inset-0 bg-black/40 z-10" /> {/* Reduced opacity for better image visibility */}
       
       {sliderImages.map((image, index) => (
         <div 
           key={image}
-          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-            index === currentIndex ? 'opacity-100' : 'opacity-0'
+          className={`absolute inset-0 w-full h-full transition-opacity duration-1500 ease-in-out hero-slider-transition ${
+            index === currentIndex ? 'hero-slider-active' : 'hero-slider-inactive'
           }`}
         >
           <img
