@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ import {
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useAuth } from '@/contexts/AuthContext';
 import Registration from '@/components/Registration';
+import HeroBackgroundSlider from '@/components/HeroBackgroundSlider';
 
 const LandingPage = () => {
   const { isAuthenticated } = useAuth();
@@ -27,7 +29,7 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="py-4 bg-white dark:bg-gray-800 border-b">
+      <header className="py-4 bg-white dark:bg-gray-800 border-b z-50 relative">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Dumbbell className="h-6 w-6 text-fitblue-500" />
@@ -56,20 +58,21 @@ const LandingPage = () => {
         </div>
       </header>
       
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-b from-fitblue-500 to-fitblue-600 dark:from-gray-800 dark:to-gray-900">
-        <div className="container mx-auto px-4 max-w-6xl">
+      {/* Hero Section with Background Slider */}
+      <section className="relative py-32 flex items-center min-h-[600px] overflow-hidden">
+        <HeroBackgroundSlider />
+        <div className="container mx-auto px-4 max-w-6xl relative z-20">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
             <div className="lg:w-1/2 space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight animate-fade-in">
                 Transform Your Workouts with FitLogix
               </h1>
-              <p className="text-lg text-white/80 max-w-lg">
+              <p className="text-lg text-white/90 max-w-lg">
                 Track your progress, time your workouts, and stay consistent—all in one app!
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link to={isAuthenticated ? "/dashboard" : "/login"}>
-                  <Button size="lg" className="font-medium text-base group">
+                  <Button size="lg" className="font-medium text-base group bg-fitblue-500 hover:bg-fitblue-600">
                     Get Started
                     <ArrowRight className="ml-1 group-hover:translate-x-1 transition-transform" />
                   </Button>
@@ -78,13 +81,6 @@ const LandingPage = () => {
                   Learn More
                 </Button>
               </div>
-            </div>
-            <div className="lg:w-1/2">
-              <img 
-                src="/placeholder.svg" 
-                alt="FitLogix App" 
-                className="w-full h-auto rounded-xl shadow-2xl" 
-              />
             </div>
           </div>
         </div>
@@ -194,9 +190,9 @@ const LandingPage = () => {
               </div>
               <div className="lg:w-1/2">
                 <img 
-                  src="/placeholder.svg" 
+                  src="/images/registration-workout.jpg" 
                   alt="FitLogix App Dashboard" 
-                  className="w-full h-auto rounded-xl shadow-lg" 
+                  className="w-full h-auto rounded-xl shadow-lg object-cover" 
                 />
               </div>
             </div>
@@ -257,7 +253,7 @@ const LandingPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Testimonial 1 */}
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
@@ -267,7 +263,9 @@ const LandingPage = () => {
                 "FitLogix has completely changed how I track my workouts. The timer feature saves me from constantly checking my phone clock!"
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <img src="/images/testimonial-1.jpg" alt="Alex Johnson" className="w-full h-full object-cover" />
+                </div>
                 <div>
                   <h4 className="font-semibold">Alex Johnson</h4>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Fitness Enthusiast</p>
@@ -276,7 +274,7 @@ const LandingPage = () => {
             </div>
 
             {/* Testimonial 2 */}
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
@@ -286,7 +284,9 @@ const LandingPage = () => {
                 "The progress charts keep me motivated! I can visually see my improvement which makes all the difference in staying consistent."
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <img src="/images/testimonial-2.jpg" alt="Sarah Williams" className="w-full h-full object-cover" />
+                </div>
                 <div>
                   <h4 className="font-semibold">Sarah Williams</h4>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Marathon Runner</p>
@@ -295,7 +295,7 @@ const LandingPage = () => {
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
@@ -305,7 +305,9 @@ const LandingPage = () => {
                 "As a personal trainer, I recommend FitLogix to all my clients. It's intuitive, comprehensive, and helps them stay accountable."
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <img src="/images/testimonial-3.jpg" alt="Mike Peterson" className="w-full h-full object-cover" />
+                </div>
                 <div>
                   <h4 className="font-semibold">Mike Peterson</h4>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Certified Personal Trainer</p>
@@ -434,4 +436,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
