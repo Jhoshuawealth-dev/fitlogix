@@ -81,6 +81,54 @@ export const exercises: Exercise[] = [
     ],
     category: 'Shoulders',
     muscles: ['Shoulders', 'Triceps', 'Upper Back']
+  },
+  {
+    id: '6',
+    name: 'Dumbbell Bicep Curls',
+    description: 'An isolation exercise targeting the biceps for arm development.',
+    image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=2070&auto=format&fit=crop',
+    steps: [
+      'Stand with feet shoulder-width apart, holding dumbbells at your sides',
+      'Keep your elbows close to your torso',
+      'Curl the weights upward while keeping upper arms stationary',
+      'Continue curling until the dumbbells reach shoulder level',
+      'Lower back to the starting position with control',
+      'Repeat for the desired number of repetitions'
+    ],
+    category: 'Arms',
+    muscles: ['Biceps', 'Forearms']
+  },
+  {
+    id: '7',
+    name: 'Tricep Dips',
+    description: 'A compound movement that targets the triceps, chest and shoulders.',
+    image: 'https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?q=80&w=2070&auto=format&fit=crop',
+    steps: [
+      'Position yourself on parallel bars with arms straight',
+      'Lower your body by bending your elbows',
+      'Keep your elbows close to your body',
+      'Descend until your shoulders are below your elbows',
+      'Push yourself back up to the starting position',
+      'Repeat for the desired number of repetitions'
+    ],
+    category: 'Arms',
+    muscles: ['Triceps', 'Chest', 'Shoulders']
+  },
+  {
+    id: '8',
+    name: 'Plank',
+    description: 'A core stabilization exercise that strengthens the entire midsection.',
+    image: 'https://images.unsplash.com/photo-1562771379-eafdca7a02f8?q=80&w=2070&auto=format&fit=crop',
+    steps: [
+      'Start in a push-up position with arms straight',
+      'Lower onto your forearms with elbows under shoulders',
+      'Keep your body in a straight line from head to heels',
+      'Engage your core and squeeze your glutes',
+      'Hold the position while breathing normally',
+      'Maintain proper form for the desired duration'
+    ],
+    category: 'Core',
+    muscles: ['Abs', 'Obliques', 'Lower Back']
   }
 ];
 
@@ -149,6 +197,43 @@ export const getUserExercises = (userId: string) => {
         { id: '2', weight: 105, reps: 8, completed: false },
         { id: '3', weight: 115, reps: 6, completed: false }
       ]
+    },
+    // New exercises
+    {
+      id: '6',
+      userId,
+      exerciseId: '6',
+      completed: false,
+      date: today,
+      sets: [
+        { id: '1', weight: 25, reps: 12, completed: false },
+        { id: '2', weight: 30, reps: 10, completed: false },
+        { id: '3', weight: 35, reps: 8, completed: false }
+      ]
+    },
+    {
+      id: '7',
+      userId,
+      exerciseId: '7',
+      completed: false,
+      date: today,
+      sets: [
+        { id: '1', weight: 0, reps: 12, completed: false },
+        { id: '2', weight: 0, reps: 10, completed: false },
+        { id: '3', weight: 0, reps: 8, completed: false }
+      ]
+    },
+    {
+      id: '8',
+      userId,
+      exerciseId: '8',
+      completed: false,
+      date: today,
+      sets: [
+        { id: '1', weight: 0, reps: 60, completed: false }, // 60 seconds
+        { id: '2', weight: 0, reps: 45, completed: false }, // 45 seconds
+        { id: '3', weight: 0, reps: 30, completed: false }  // 30 seconds
+      ]
     }
   ];
 };
@@ -158,6 +243,9 @@ export const getUserWorkouts = (userId: string) => {
   const today = new Date().toISOString().split('T')[0];
   const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
   const twoDaysAgo = new Date(Date.now() - 2 * 86400000).toISOString().split('T')[0];
+  const threeDaysAgo = new Date(Date.now() - 3 * 86400000).toISOString().split('T')[0];
+  const fourDaysAgo = new Date(Date.now() - 4 * 86400000).toISOString().split('T')[0];
+  const fiveDaysAgo = new Date(Date.now() - 5 * 86400000).toISOString().split('T')[0];
   
   return [
     {
@@ -189,6 +277,37 @@ export const getUserWorkouts = (userId: string) => {
       date: today,
       completed: false,
       completionPercentage: 0
+    },
+    // New workouts
+    {
+      id: '4',
+      userId,
+      name: 'Arm Day',
+      description: 'Focus on biceps and triceps',
+      exercises: ['6', '7'],
+      date: threeDaysAgo,
+      completed: true,
+      completionPercentage: 100
+    },
+    {
+      id: '5',
+      userId,
+      name: 'Back & Core',
+      description: 'Develop back strength and core stability',
+      exercises: ['3', '4', '8'],
+      date: fourDaysAgo,
+      completed: true,
+      completionPercentage: 100
+    },
+    {
+      id: '6',
+      userId,
+      name: 'Recovery Day',
+      description: 'Light workout with stretching and core',
+      exercises: ['8'],
+      date: fiveDaysAgo,
+      completed: true,
+      completionPercentage: 100
     }
   ];
 };

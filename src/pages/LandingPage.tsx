@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -15,10 +14,12 @@ import {
   ChevronRight,
   Instagram,
   Twitter,
-  Facebook
+  Facebook,
+  UserPlus
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useAuth } from '@/contexts/AuthContext';
+import Registration from '@/components/Registration';
 
 const LandingPage = () => {
   const { isAuthenticated } = useAuth();
@@ -39,9 +40,17 @@ const LandingPage = () => {
                 <Button>Go to Dashboard</Button>
               </Link>
             ) : (
-              <Link to="/login">
-                <Button>Log In</Button>
-              </Link>
+              <div className="flex gap-2">
+                <Link to="/register">
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <UserPlus className="h-4 w-4" />
+                    Sign Up
+                  </Button>
+                </Link>
+                <Link to="/login">
+                  <Button>Log In</Button>
+                </Link>
+              </div>
             )}
           </div>
         </div>
@@ -149,6 +158,51 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Registration Section */}
+      {!isAuthenticated && (
+        <section className="py-20 bg-white dark:bg-gray-800 border-t border-b border-gray-100 dark:border-gray-700">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="flex flex-col lg:flex-row items-center gap-12">
+              <div className="lg:w-1/2 space-y-6">
+                <h2 className="text-3xl font-bold mb-4">Start Your Fitness Journey Today</h2>
+                <p className="text-gray-600 dark:text-gray-400 max-w-xl">
+                  Join thousands of users who have transformed their fitness with FitLogix. 
+                  Create your free account and start tracking your progress right away.
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "Track unlimited workouts",
+                    "Monitor your progress with detailed charts",
+                    "Get personalized workout recommendations",
+                    "Set goals and stay motivated"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="pt-4">
+                  <Link to="/register">
+                    <Button size="lg" className="font-medium text-base group">
+                      Create Free Account
+                      <UserPlus className="ml-1" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <div className="lg:w-1/2">
+                <img 
+                  src="/placeholder.svg" 
+                  alt="FitLogix App Dashboard" 
+                  className="w-full h-auto rounded-xl shadow-lg" 
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* How It Works Section */}
       <section className="py-20 bg-white dark:bg-gray-800">
@@ -317,12 +371,30 @@ const LandingPage = () => {
           <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
             Join thousands of users who have improved their fitness with FitLogix.
           </p>
-          <Link to={isAuthenticated ? "/dashboard" : "/login"}>
-            <Button size="lg" variant="secondary" className="font-medium text-base group">
-              Get Started for Free
-              <ChevronRight className="ml-1 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {isAuthenticated ? (
+              <Link to="/dashboard">
+                <Button size="lg" variant="secondary" className="font-medium text-base group w-full sm:w-auto">
+                  Go to Dashboard
+                  <ChevronRight className="ml-1 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Link to="/register">
+                  <Button size="lg" variant="secondary" className="font-medium text-base group w-full sm:w-auto">
+                    Sign Up Free
+                    <UserPlus className="ml-1" />
+                  </Button>
+                </Link>
+                <Link to="/login">
+                  <Button size="lg" variant="outline" className="font-medium text-base bg-white/10 text-white border-white/20 hover:bg-white/20 w-full sm:w-auto">
+                    Log In
+                  </Button>
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </section>
 
@@ -362,3 +434,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
