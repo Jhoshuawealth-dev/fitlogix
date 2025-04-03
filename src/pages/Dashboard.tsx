@@ -10,6 +10,7 @@ import { exercises, getUserWorkouts, getUserExercises } from '@/data/exercises';
 import { Exercise, UserExercise, Workout, WorkoutSet } from '@/types';
 import WorkoutAdjustment from '@/components/WorkoutAdjustment';
 import { useToast } from '@/components/ui/use-toast';
+import WorkoutCategoriesSection from '@/components/WorkoutCategoriesSection';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -89,7 +90,7 @@ const Dashboard = () => {
     <div className="container mx-auto px-4 py-6 max-w-5xl">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">Welcome back, {user?.name}</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Welcome back, {user?.email}</h1>
           <p className="text-gray-600 mt-1">Track your fitness journey with FitLogix</p>
         </div>
         <div className="mt-4 md:mt-0 flex gap-2">
@@ -109,13 +110,13 @@ const Dashboard = () => {
       </div>
 
       {/* Progress Overview */}
-      <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+      <div className="bg-white rounded-xl shadow-md p-6 mb-8 dark:bg-gray-800">
         <h2 className="text-xl font-semibold mb-4">Today's Progress</h2>
         
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex-1">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-600">Completion Rate</span>
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Completion Rate</span>
               <span className="text-sm font-semibold">{progressPercentage}%</span>
             </div>
             <div className="progress-bar">
@@ -124,7 +125,7 @@ const Dashboard = () => {
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
-            <div className="mt-4 text-sm text-gray-600">
+            <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
               {completedExercises} of {totalExercises} exercises completed
             </div>
           </div>
@@ -150,8 +151,11 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* Workout Categories Section */}
+      <WorkoutCategoriesSection />
+
       {/* Today's Exercises */}
-      <h2 className="text-2xl font-bold mb-4">Today's Workout</h2>
+      <h2 className="text-2xl font-bold mb-4 mt-12">Today's Workout</h2>
       
       {todayExercises.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">

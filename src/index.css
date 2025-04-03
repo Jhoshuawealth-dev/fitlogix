@@ -107,4 +107,21 @@
   .progress-fill {
     @apply h-full bg-fitblue-500 transition-all duration-300;
   }
+  
+  /* Fix for dropdown menus */
+  .dropdown-menu {
+    @apply z-[1000] bg-white dark:bg-gray-800 shadow-lg rounded-md border border-gray-200 dark:border-gray-700;
+    position: absolute;
+  }
+}
+
+/* Fix dropdown issue for components from UI libraries */
+[data-radix-popper-content-wrapper] {
+  z-index: 999 !important;
+}
+
+/* Make dropdown menu items visible against backgrounds */
+.radix-dropdown-content {
+  background-color: var(--background);
+  border: 1px solid var(--border);
 }

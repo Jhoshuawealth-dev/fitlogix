@@ -15,6 +15,7 @@ import ExerciseDetail from "@/pages/ExerciseDetail";
 import Progress from "@/pages/Progress";
 import NotFound from "@/pages/NotFound";
 import LandingPage from "@/pages/LandingPage";
+import WorkoutDetails from "@/pages/WorkoutDetails";
 
 // ProtectedRoute component to handle authentication
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -74,6 +75,15 @@ const AppRoutes = () => {
             <ProtectedRoute>
               <Header />
               <ExerciseDetail />
+            </ProtectedRoute>
+          } 
+        />
+        {/* New Workout Details Route */}
+        <Route 
+          path="/workout-details/:slug" 
+          element={
+            <ProtectedRoute>
+              <WorkoutDetails />
             </ProtectedRoute>
           } 
         />
