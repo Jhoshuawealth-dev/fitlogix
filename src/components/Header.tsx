@@ -38,6 +38,9 @@ const Header = () => {
     }
   };
 
+  // Get display name, handling the case where name might be undefined
+  const displayName = user?.name || user?.email?.split('@')[0] || 'User';
+
   return (
     <header className="border-b bg-white dark:bg-gray-800 sticky top-0 z-10">
       <div className="container mx-auto py-3 px-4 flex justify-between items-center">
@@ -62,7 +65,7 @@ const Header = () => {
               <div className="flex items-center gap-2 ml-4">
                 <ThemeToggle />
                 <User className="h-4 w-4" />
-                <span className="text-sm text-gray-600 dark:text-gray-400">{user?.name}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{displayName}</span>
                 <Button variant="ghost" size="icon" onClick={() => logout()}>
                   <LogOut className="h-4 w-4" />
                 </Button>
@@ -185,7 +188,7 @@ const Header = () => {
                 <div className="flex items-center justify-between border-t pt-3 mt-2">
                   <div className="flex items-center gap-2">
                     <User className="h-4 w-4" />
-                    <span className="text-sm text-gray-600 dark:text-gray-400">{user?.name}</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">{displayName}</span>
                   </div>
                   <Button variant="ghost" size="sm" onClick={() => { logout(); toggleMobileMenu(); }}>
                     <LogOut className="h-4 w-4 mr-2" /> Logout

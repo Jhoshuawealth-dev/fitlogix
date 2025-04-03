@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import supabase from '@/lib/supabase';
@@ -7,6 +6,7 @@ import supabase from '@/lib/supabase';
 export interface User {
   id: string;
   email: string;
+  name?: string; // Added name property as optional
 }
 
 interface AuthContextType {
@@ -54,6 +54,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setUser({
             id: session.user.id,
             email: session.user.email || '',
+            name: session.user.email?.split('@')[0] || 'User', // Add default name based on email
           });
         }
       } catch (error) {
@@ -72,6 +73,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setUser({
             id: session.user.id,
             email: session.user.email || '',
+            name: session.user.email?.split('@')[0] || 'User', // Add default name based on email
           });
         } else {
           setUser(null);
@@ -106,6 +108,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser({
           id: data.user.id,
           email: data.user.email || '',
+          name: data.user.email?.split('@')[0] || 'User', // Add default name based on email
         });
         
         toast({
